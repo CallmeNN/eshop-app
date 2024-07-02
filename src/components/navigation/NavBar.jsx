@@ -6,20 +6,17 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import { useContext, useMemo, useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 import MuiTextField from "../../common/MuiTextField";
 import { Stack } from "@mui/material";
 import useAuthentication from "../../useAuthentication";
+import { ROUTE_HOME, ROUTE_LOGIN, ROUTE_PRODUCTS, ROUTE_SIGNUP } from "../../constants/routes";
 
 function NavBar(props) {
   const { AuthCtx } = useAuthentication();
-  const { user,logout } = useContext(AuthCtx);
-
-  const pages = useMemo(() => {
-    if (user) return ["Home", "Add Product", "Logout"];
-    else return ["Login", "Sign Up"];
-  }, [user]);
-
+  const { user, logout } = useContext(AuthCtx);
   return (
+    <>
     <AppBar position="static" sx={{ background: "#4050b5" }}>
       <Container maxWidth="xl">
         <Toolbar
@@ -52,32 +49,93 @@ function NavBar(props) {
             />
           </Box>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                sx={[
-                  page === "Logout" ? {
-                    background: "#f40157",
-                    textDecoration: "none",
-                  }:
-                  {
-                    textDecoration: "underline",
-                  },
-                  {
-                    my: 2,
-                    color: "white",
-                    display: "block",
-                  }
-                ]}
-                onClick={page==='Logout'?logout:()=>{}}
-              >
-                {page}
-              </Button>
-            ))}
+            {user ? (
+              <>
+                <Link to={ROUTE_HOME}>
+                  <Button
+                    key="Home"
+                    sx={[
+                      { extDecoration: "underline" },
+                      {
+                        my: 2,
+                        color: "white",
+                        display: "block",
+                      },
+                    ]}
+                  >
+                    Home
+                  </Button>
+                </Link>
+                <Link to={ROUTE_PRODUCTS}>
+                  <Button
+                    key="Add Product"
+                    sx={[
+                      { textDecoration: "underline" },
+                      {
+                        my: 2,
+                        color: "white",
+                        display: "block",
+                      },
+                    ]}
+                  >
+                    Add Products
+                  </Button>
+                </Link>
+                <Button
+                  key="logout"
+                  sx={[
+                    { background: "#f40157", textDecoration: "none" },
+                    {
+                      my: 2,
+                      color: "white",
+                      display: "block",
+                    },
+                  ]}
+                  onClick={logout}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to={ROUTE_LOGIN}>
+                  <Button
+                    key="Login"
+                    sx={[
+                      { textDecoration: "underline" },
+                      {
+                        my: 2,
+                        color: "white",
+                        display: "block",
+                      },
+                    ]}
+                  >
+                    Login
+                  </Button>
+                </Link>
+                <Link to={ROUTE_SIGNUP}>
+                  <Button
+                    key="Sign Up"
+                    sx={[
+                      { textDecoration: "underline" },
+                      {
+                        my: 2,
+                        color: "white",
+                        display: "block",
+                      },
+                    ]}
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
+              </>
+            )}
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
+    <Outlet/>
+    </>
   );
 }
 export default NavBar;

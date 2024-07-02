@@ -50,27 +50,27 @@ function App() {
   const router = createBrowserRouter([
     {
       path: ROUTE_HOME,
-      element: <Home />,
+      element: <NavBar />,
       exact: true,
       // errorElement:<ErrorPage/>,
-      children: [],
-    },
-
-    {
-      path: ROUTE_SIGNUP,
-      element: <Signup />,
-    },
-    {
-      path: ROUTE_LOGIN,
-      element: <Login />,
-    },
-    {
-      path: ROUTE_PRODUCTS,
-      element: (
-        <Protected user={user}>
-          <Products />
-        </Protected>
-      ),
+      children: [
+        {
+          path: ROUTE_SIGNUP,
+          element: <Signup />,
+        },
+        {
+          path: ROUTE_LOGIN,
+          element: <Login />,
+        },
+        {
+          path: ROUTE_PRODUCTS,
+          element: (
+            <Protected user={user}>
+              <Products />
+            </Protected>
+          ),
+        },
+      ],
     },
   ]);
 
@@ -78,7 +78,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div sx={{ bgcolor: "background.paper" }}>
-        <NavBar />
         <RouterProvider router={router} />
       </div>
     </ThemeProvider>
