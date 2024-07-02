@@ -19,7 +19,8 @@ export const authenticationService = {
                 return data;
             }
         } catch (error) {
-            throw new Error(error);
+            console.log(error)
+            throw (error?.message || 'Something went wrong');
         }
     },
 
@@ -43,7 +44,7 @@ export const authenticationService = {
                 return data;
             }
         } catch (error) {
-            throw new Error(error);
+            throw new Error(error?.message || 'Something went wrong');
         }
     }
 
