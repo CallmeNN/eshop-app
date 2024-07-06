@@ -20,6 +20,7 @@ const useAuthentication = (history, location) => {
   }
   
   const logout = () => {
+    localStorage.setItem("user", null);
     setUser(null);
     setError(null);
   };
