@@ -11,16 +11,20 @@ export default function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    try {
-      if (products.length === 0) {
-        const data = apiconfig({ endpoint: "/products/categories." });
-        setProducts(data)
-        console.log(data);
+    const fetchProducts = async () => {
+      try {
+        if (products.length === 0) {
+          const data = await apiconfig({ endpoint: "/products/categories" });
+          setProducts(data);
+          console.log(data);
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
-    }
-  }, [products]);
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <Box sx={{ m: 2 }}>

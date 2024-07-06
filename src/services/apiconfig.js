@@ -19,7 +19,7 @@ const apiconfig = async ({
     const response = await fetch(baseUrl + endpoint, options);
     if (!response.ok) {
       const error = await response.json();
-      console.error(error);
+      console.error(error.error);
       throw {
         message: error.response?.data?.message || "Unknown error occurred",
         code: error.response?.data?.code || "UNKNOWN_ERROR",
