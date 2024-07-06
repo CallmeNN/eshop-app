@@ -47,21 +47,14 @@ const theme = createTheme({
 function App() {
   const { AuthCtx } = useAuthentication();
   const { user } = useContext(AuthCtx);
+
   const router = createBrowserRouter([
     {
-      path: ROUTE_HOME,
-      element: <NavBar />,
-      exact: true,
-      // errorElement:<ErrorPage/>,
+      path: "/",
+      element: <Home/>,
       children: [
-        {
-          path: ROUTE_SIGNUP,
-          element: <Signup />,
-        },
-        {
-          path: ROUTE_LOGIN,
-          element: <Login />,
-        },
+        { path: ROUTE_SIGNUP, element: <Signup /> },
+        { path: ROUTE_LOGIN, element: <Login /> },
         {
           path: ROUTE_PRODUCTS,
           element: (

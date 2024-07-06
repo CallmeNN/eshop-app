@@ -40,11 +40,11 @@ export default function SignIn() {
     user && navigate(from);
   }, [user, from]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    login({ email: data.get("email"), password: data.get("password") });
+    await login({ email: data.get("email"), password: data.get("password") });
     navigate(ROUTE_PRODUCTS);
   };
 

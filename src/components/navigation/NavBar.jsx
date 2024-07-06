@@ -6,7 +6,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import { useContext, useMemo, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MuiTextField from "../../common/MuiTextField";
 import { Stack } from "@mui/material";
 import useAuthentication from "../../useAuthentication";
@@ -134,7 +134,6 @@ function NavBar(props) {
         </Toolbar>
       </Container>
     </AppBar>
-    <Outlet/>
     </>
   );
 }
