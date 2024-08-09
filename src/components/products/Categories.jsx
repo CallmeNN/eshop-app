@@ -18,7 +18,7 @@ function Categories({ handleCatChange }) {
       try {
         if (categories.length === 0) {
           const data = await apiconfig({ endpoint: "/products/categories" });
-          categories(data);
+          setCategories(data);
           console.log(data);
         }
       } catch (error) {

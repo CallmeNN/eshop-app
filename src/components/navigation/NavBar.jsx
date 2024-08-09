@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import { useContext, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import MuiTextField from "../../common/MuiTextField";
+import MuiTextField from "../../common/components/MuiTextField";
 import { Stack } from "@mui/material";
 import useAuthentication from "../../useAuthentication";
 import { ROUTE_HOME, ROUTE_LOGIN, ROUTE_PRODUCTS, ROUTE_SIGNUP } from "../../constants/routes";
@@ -66,7 +66,7 @@ function NavBar(props) {
                     Home
                   </Button>
                 </Link>
-                <Link to={ROUTE_PRODUCTS}>
+                {user?.roles[0] == "ADMIN" && <Link to={ROUTE_PRODUCTS}>
                   <Button
                     key="Add Product"
                     sx={[
@@ -80,7 +80,7 @@ function NavBar(props) {
                   >
                     Add Products
                   </Button>
-                </Link>
+                </Link>}
                 <Button
                   key="logout"
                   sx={[

@@ -1,4 +1,4 @@
-import {useEffect,useContext} from "react";
+import { useEffect, useContext } from "react";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -10,9 +10,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ROUTE_PRODUCTS } from "../constants/routes";
+import { ROUTE_PRODUCTS, ROUTE_SIGNUP } from "../constants/routes";
 import useAuthentication from "../useAuthentication";
 import { Alert } from "@mui/material";
+import { Link as RouteLink } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -95,15 +96,13 @@ export default function SignIn() {
             Sign In
           </Button>
           <Box>
-            <Link href="#" variant="body2">
+            <RouteLink to={ROUTE_SIGNUP}>
               {"Don't have an account? Sign Up"}
-            </Link>
+            </RouteLink>
           </Box>
         </Box>
       </Box>
-      <Box>
-      {error ? <Alert severity="warning">{error?.message}</Alert>:""}
-      </Box>
+      <Box>{error ? <Alert severity="warning">{error}</Alert> : ""}</Box>
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
   );

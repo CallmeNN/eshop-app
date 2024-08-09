@@ -1,12 +1,10 @@
-import { CssBaseline, colors, createTheme } from "@mui/material";
+import { CssBaseline, createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import NavBar from "./components/navigation/NavBar";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Home from "./components/home/Home";
 import {
-  ROUTE_HOME,
   ROUTE_LOGIN,
   ROUTE_PRODUCTS,
   ROUTE_SIGNUP,
@@ -14,7 +12,7 @@ import {
 import Products from "./components/products/Products";
 import useAuthentication from "./useAuthentication";
 import { useContext } from "react";
-import Protected from "./components/Protected";
+import ProtectedRoute from "./common/ProtectedRoute";
 
 const theme = createTheme({
   palette: {
@@ -51,16 +49,19 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home/>,
+      element: <Home />,
       children: [
         { path: ROUTE_SIGNUP, element: <Signup /> },
         { path: ROUTE_LOGIN, element: <Login /> },
         {
           path: ROUTE_PRODUCTS,
           element: (
-            <Protected user={user}>
+            <ProtectedRoute
+              validate={() => user.roles[0] === "ADMIN"}
+              fallbackRoute={"/"}
+            >
               <Products />
-            </Protected>
+            </ProtectedRoute>
           ),
         },
       ],
