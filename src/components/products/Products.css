@@ -1,0 +1,9 @@
+.productlist{
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 1em;
+    column-gap: 1em;
+    justify-content: center;
+    align-items: center;
+}

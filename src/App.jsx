@@ -5,6 +5,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Home from "./components/home/Home";
 import {
+  ROUTE_ADD_PRODUCTS,
   ROUTE_LOGIN,
   ROUTE_PRODUCTS,
   ROUTE_SIGNUP,
@@ -13,6 +14,7 @@ import Products from "./components/products/Products";
 import useAuthentication from "./useAuthentication";
 import { useContext } from "react";
 import ProtectedRoute from "./common/ProtectedRoute";
+import ProductsForm from "./components/manageProducts/ProductsForm";
 
 const theme = createTheme({
   palette: {
@@ -56,11 +58,21 @@ function App() {
         {
           path: ROUTE_PRODUCTS,
           element: (
-            <ProtectedRoute
-              validate={() => user.roles[0] === "ADMIN"}
-              fallbackRoute={"/"}
-            >
+            <ProtectedRoute validate={() => !!user} fallbackRoute={ROUTE_LOGIN}>
               <Products />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: ROUTE_ADD_PRODUCTS,
+          element: (
+            <ProtectedRoute
+              validate={() => !!user && user?.roles[0] === "ADMIN"}
+              fallbackRoute={
+                !!user && user?.roles[0] === "USER" ? "/" : ROUTE_LOGIN
+              }
+            >
+              <ProductsForm />
             </ProtectedRoute>
           ),
         },

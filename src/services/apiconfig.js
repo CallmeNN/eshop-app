@@ -1,13 +1,11 @@
-const apiconfig = async ({
-  endpoint,
-  method = "GET",
-  body = null,
-}) => {
-  const baseUrl = `http://localhost:8080/api`;
-  const options= {
+import { token } from "../common/utils/commonFunction";
+
+const apiconfig = async ({ endpoint, method = "GET", body = null }) => {
+  const options = {
     method,
     headers: {
       "Content-Type": "application/json",
+      "x-auth-token": token,
     },
   };
 
@@ -16,7 +14,7 @@ const apiconfig = async ({
   }
 
   try {
-    const response = await fetch(baseUrl + endpoint, options);
+    const response = await fetch(endpoint, options);
     if (!response.ok) {
       const error = await response.json();
       console.error(error.error);
@@ -25,7 +23,7 @@ const apiconfig = async ({
         code: error.response?.data?.code || "UNKNOWN_ERROR",
       };
     }
-    const data = await response.json()
+    const data = await response.json();
     return data;
   } catch (error) {
     console.error(error);

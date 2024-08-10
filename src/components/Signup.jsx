@@ -45,7 +45,6 @@ export default function Signup() {
       password: data.get("password"),
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
-      role: ["user"],
       contactNumber: data.get("contact"),
     };
     try {

@@ -1,6 +1,7 @@
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import apiconfig from "../../services/apiconfig";
+import { getCategoriesApi } from "../../services/endpoint";
 
 function Categories({ handleCatChange }) {
   const [categories, setCategories] = useState([
@@ -17,7 +18,7 @@ function Categories({ handleCatChange }) {
     const fetchCategories = async () => {
       try {
         if (categories.length === 0) {
-          const data = await apiconfig({ endpoint: "/products/categories" });
+          const data = await apiconfig({ endpoint: getCategoriesApi});
           setCategories(data);
           console.log(data);
         }
