@@ -1,4 +1,5 @@
 import { setItem } from "../common/utils/commonFunction";
+import Cookies from "js-cookie";
 
 export const authenticationService = {
   baseUrl: `${process.env.BASE_URL}`,
@@ -15,11 +16,13 @@ export const authenticationService = {
     try {
       const res = await fetch(endpoint, options);
       if (!res.ok) {
+        
         throw new Error("something went wrong");
       } else {
-        const token = res.headers.get("X-Auth-Token");
+        
+        const token = res.headers.get("x-auth-token");
         if (token) {
-          setItem("token", token); // Save token in localStorage
+          Cookies.set("x-auth-token", token, { secure: true, sameSite: "Strict" });
         } else {
           console.error("Token not found in response headers");
         }

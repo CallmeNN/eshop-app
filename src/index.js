@@ -7,6 +7,8 @@ import '@fontsource/roboto/700.css';
 import './index.css';
 import App from './App';
 import useAuthentication from './useAuthentication';
+import { Provider } from 'react-redux';
+import store from "./store";
 
 
 function ConnectedApp() {
@@ -22,7 +24,7 @@ function ConnectedApp() {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-      <ConnectedApp />
+      <Provider store={store}><ConnectedApp /></Provider>
   </React.StrictMode>
 );
 

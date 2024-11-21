@@ -2,13 +2,9 @@ import ProductCard from "./ProductCard";
 function ProductList({ productList = [] }) {
   return (
     <div className="productlist">
-      {productList.map(({ id, image, price, title, description }) => {
+      {productList.map((productData) => {
         return <ProductCard
-          key={id}
-          image={image}
-          price={price}
-          title={title}
-          description={description}
+          productData={productData}
         />;
       })}
     </div>

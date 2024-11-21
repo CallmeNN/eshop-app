@@ -15,6 +15,7 @@ import useAuthentication from "./useAuthentication";
 import { useContext } from "react";
 import ProtectedRoute from "./common/ProtectedRoute";
 import ProductsForm from "./components/manageProducts/ProductsForm";
+import ProductDetails from "./components/products/ProductDetails";
 
 const theme = createTheme({
   palette: {
@@ -76,6 +77,10 @@ function App() {
             </ProtectedRoute>
           ),
         },
+        {
+          path: "/products/:id",
+          element: <ProductDetails/>
+        }
       ],
     },
   ]);

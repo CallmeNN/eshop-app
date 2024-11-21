@@ -7,10 +7,19 @@ import { Button, CardActionArea, CardActions, Box } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useAuthentication from "../../useAuthentication";
+import { useNavigate } from "react-router-dom";
 
-export default function ProductCard({ title, price, description, image }) {
+export default function ProductCard({productData}) {
   const { AuthCtx } = useAuthentication();
   const { user } = React.useContext(AuthCtx);
+  const navigate = useNavigate();
+
+  const { name, price, description, imageUrl,_id } = productData;
+
+  const onClickCard = () => {
+    navigate(`/products/${_id}`,{ state: productData });
+  }
+
   return (
     <Card
       sx={{
@@ -30,7 +39,7 @@ export default function ProductCard({ title, price, description, image }) {
             padding: "8px",
           }}
           component="img"
-          image={image}
+          image={imageUrl}
           alt="product image"
         />
         <CardContent sx={{ flexGrow: 1 }}>
@@ -42,10 +51,10 @@ export default function ProductCard({ title, price, description, image }) {
             }}
           >
             <Typography gutterBottom variant="h5" component="div">
-              {title}
+              {name}
             </Typography>
             <Typography gutterBottom variant="h5" component="div">
-              {price}
+              Rs.{price}
             </Typography>
           </Box>
           <Typography variant="body2" color="text.secondary">
@@ -56,7 +65,7 @@ export default function ProductCard({ title, price, description, image }) {
       <CardActions
         sx={{ mt: "auto", display: "flex", justifyContent: "space-between" }}
       >
-        <Button size="small" variant="contained">
+        <Button size="small" variant="contained" onClick={onClickCard}>
           Buy
         </Button>
         {user && user?.roles[0] === "ADMIN" && (

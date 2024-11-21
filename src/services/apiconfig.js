@@ -1,11 +1,14 @@
-import { token } from "../common/utils/commonFunction";
+import Cookies from "js-cookie";
 
 const apiconfig = async ({ endpoint, method = "GET", body = null }) => {
+  
+  const token = Cookies.get("x-auth-token");
+
   const options = {
     method,
     headers: {
-      "Content-Type": "application/json",
-      "x-auth-token": token,
+      "Content-Type": "application/json;charset=UTF-8",
+      ...(token && {"x-auth-token": token})
     },
   };
 

@@ -12,6 +12,7 @@ import {
 import apiconfig from "../../services/apiconfig";
 import { createProductApi } from "../../services/endpoint";
 import CreateableSelect from "../../common/components/CreateableSelect";
+import { productService } from "../../services/products";
 
 export default function ProductsForm() {
   const [alert, setAlert] = React.useState({
@@ -47,11 +48,7 @@ export default function ProductsForm() {
       category: category
     };
     try {
-      await await apiconfig({
-        method: "POST",
-        body,
-        endpoint: createProductApi,
-      });
+      await productService.createProducts(body);
       setAlert({
         message: `Product ${body.name} added successfully!`,
         severity: "success",
